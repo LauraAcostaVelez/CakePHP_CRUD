@@ -4,22 +4,6 @@
  * @var iterable<\App\Model\Entity\Familia> $familias
  */
 ?>
-<div class="row">
-    <aside class="column">
-        <div class="side-nav">
-            <h4 class="heading"><?= __('Actions') ?></h4>
-            <?= $this->Html->link('PDF View', [
-                'controller' => 'Pdf',
-                'action' => 'create',
-                ], ['class' => 'side-nav-item']) ?>
-            <?= $this->Html->link('PDF Download', [
-                'controller' => 'Pdf',
-                'action' => 'create',
-                '?' => ['download' => 1]
-                ], ['class' => 'side-nav-item']) ?>
-        </div>
-    </aside>
-    <div class="column-responsive column-80">
 <div class="familias index content">
     <?= $this->Html->link(__('New Familia'), ['action' => 'add'], ['class' => 'button float-right']) ?>
     <h3><?= __('Familias') ?></h3>

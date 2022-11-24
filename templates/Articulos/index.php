@@ -6,7 +6,7 @@
 ?>
 <div class="articulos index content">
     <?= $this->Html->link(__('New Articulo'), ['action' => 'add'], ['class' => 'button float-right']) ?>
-    <h3><?= __('Articulos') ?></h3>
+    <h3><?= __('Listado de articulos') ?></h3>
 
     <?= $this->Form->create(null, ['type' => 'get']) ?>
     <?= $this->Form->control('key', ['label' => 'Buscar', 'value' => $this->request->getQuery('key')]) ?>
@@ -19,11 +19,11 @@
                 <tr>
                     <th><?= $this->Paginator->sort('id') ?></th>
                     <th><?= $this->Paginator->sort('nombre') ?></th>
+                    <th><?= $this->Paginator->sort('familia_id') ?></th>
                     <th><?= $this->Paginator->sort('codigo') ?></th>
                     <th><?= $this->Paginator->sort('precio_compra') ?></th>
                     <th><?= $this->Paginator->sort('precio_venta') ?></th>
                     <th><?= $this->Paginator->sort('stock') ?></th>
-                    <th><?= $this->Paginator->sort('familia_id') ?></th>
                     <th><?= $this->Paginator->sort('created') ?></th>
                     <th><?= $this->Paginator->sort('modified') ?></th>
                     <th class="actions"><?= __('Actions') ?></th>
@@ -34,11 +34,11 @@
                 <tr>
                     <td><?= $this->Number->format($articulo->id) ?></td>
                     <td><?= h($articulo->nombre) ?></td>
+                    <td><?= $articulo->has('familia') ? $this->Html->link($articulo->familia->nombre, ['controller' => 'Familias', 'action' => 'view', $articulo->familia->id]) : '' ?></td>
                     <td><?= h($articulo->codigo) ?></td>
                     <td><?= $this->Number->format($articulo->precio_compra) ?></td>
                     <td><?= $this->Number->format($articulo->precio_venta) ?></td>
                     <td><?= $this->Number->format($articulo->stock) ?></td>
-                    <td><?= $articulo->has('familia') ? $this->Html->link($articulo->familia->nombre, ['controller' => 'Familias', 'action' => 'view', $articulo->familia->id]) : '' ?></td>
                     <td><?= h($articulo->created) ?></td>
                     <td><?= h($articulo->modified) ?></td>
                     <td class="actions">

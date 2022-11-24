@@ -3,6 +3,7 @@
  * @var \App\View\AppView $this
  * @var \App\Model\Entity\Movimiento $movimiento
  * @var \Cake\Collection\CollectionInterface|string[] $articulos
+ * @var \Cake\Collection\CollectionInterface|string[] $familias
  */
 ?>
 <div class="row">
@@ -19,6 +20,7 @@
                 <legend><?= __('Add Movimiento') ?></legend>
                 <?php
                     echo $this->Form->control('fecha');
+                    echo $this->Form->control('familia_id', ['options' => $familias]);
                     echo $this->Form->control('articulo_id', ['options' => $articulos]);
                     echo $this->Form->control('cantidad_vendidos');
                 ?>

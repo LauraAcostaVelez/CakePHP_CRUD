@@ -14,8 +14,10 @@ use Cake\ORM\Entity;
  * @property int $cantidad_vendidos
  * @property \Cake\I18n\FrozenTime $created
  * @property \Cake\I18n\FrozenTime $modified
+ * @property string $familia_id
  *
  * @property \App\Model\Entity\Articulo $articulo
+ * @property \App\Model\Entity\Familia $familia
  */
 class Movimiento extends Entity
 {
@@ -34,6 +36,8 @@ class Movimiento extends Entity
         'cantidad_vendidos' => true,
         'created' => true,
         'modified' => true,
+        'familia_id' => true,
         'articulo' => true,
+        'familia' => true,
     ];
 }

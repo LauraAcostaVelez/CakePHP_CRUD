@@ -49,6 +49,11 @@ class FamiliasTable extends Table
 
         $this->hasMany('Articulos', [
             'foreignKey' => 'familia_id',
+            'dependent' => true,
+        ]);
+        $this->hasMany('Movimientos', [
+            'foreignKey' => 'familia_id',
+            'dependent' => true,
         ]);
     }
 

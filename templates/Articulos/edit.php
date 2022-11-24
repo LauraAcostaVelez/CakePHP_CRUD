@@ -24,12 +24,12 @@
                 <legend><?= __('Edit Articulo') ?></legend>
                 <?php
                     echo $this->Form->control('nombre');
+                    echo $this->Form->control('familia_id', ['options' => $familias]);
                     echo $this->Form->control('codigo');
                     echo $this->Form->control('descripcion');
                     echo $this->Form->control('precio_compra');
                     echo $this->Form->control('precio_venta');
                     echo $this->Form->control('stock');
-                    echo $this->Form->control('familia_id', ['options' => $familias]);
                 ?>
             </fieldset>
             <?= $this->Form->button(__('Submit')) ?>

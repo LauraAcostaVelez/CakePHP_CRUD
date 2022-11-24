@@ -24,6 +24,7 @@ class MovimientosControllerTest extends TestCase
     protected $fixtures = [
         'app.Movimientos',
         'app.Articulos',
+        'app.Familias',
     ];
 
     /**

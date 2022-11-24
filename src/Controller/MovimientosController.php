@@ -19,7 +19,7 @@ class MovimientosController extends AppController
     public function index()
     {
         $this->paginate = [
-            'contain' => ['Articulos'],
+            'contain' => ['Articulos', 'Familias'],
         ];
         $movimientos = $this->paginate($this->Movimientos);
 
@@ -36,7 +36,7 @@ class MovimientosController extends AppController
     public function view($id = null)
     {
         $movimiento = $this->Movimientos->get($id, [
-            'contain' => ['Articulos'],
+            'contain' => ['Articulos', 'Familias'],
         ]);
 
         $this->set(compact('movimiento'));
@@ -53,14 +53,15 @@ class MovimientosController extends AppController
         if ($this->request->is('post')) {
             $movimiento = $this->Movimientos->patchEntity($movimiento, $this->request->getData());
             if ($this->Movimientos->save($movimiento)) {
-                $this->Flash->success(__('The movimiento has been saved.'));
+                $this->Flash->success(__('El movimiento ha sido guardado.'));
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('The movimiento could not be saved. Please, try again.'));
+            $this->Flash->error(__('No se pudo guardar el movimiento. Por favor, vuelva a intentarlo.'));
         }
         $articulos = $this->Movimientos->Articulos->find('list', ['limit' => 200])->all();
-        $this->set(compact('movimiento', 'articulos'));
+        $familias = $this->Movimientos->Familias->find('list', ['limit' => 200])->all();
+        $this->set(compact('movimiento', 'articulos', 'familias'));
     }
 
     /**
@@ -78,14 +79,15 @@ class MovimientosController extends AppController
         if ($this->request->is(['patch', 'post', 'put'])) {
             $movimiento = $this->Movimientos->patchEntity($movimiento, $this->request->getData());
             if ($this->Movimientos->save($movimiento)) {
-                $this->Flash->success(__('The movimiento has been saved.'));
+                $this->Flash->success(__('El movimiento ha sido guardado.'));
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('The movimiento could not be saved. Please, try again.'));
+            $this->Flash->error(__('No se pudo guardar el movimiento. Por favor, vuelva a intentarlo.'));
         }
         $articulos = $this->Movimientos->Articulos->find('list', ['limit' => 200])->all();
-        $this->set(compact('movimiento', 'articulos'));
+        $familias = $this->Movimientos->Familias->find('list', ['limit' => 200])->all();
+        $this->set(compact('movimiento', 'articulos', 'familias'));
     }
 
     /**
@@ -100,9 +102,9 @@ class MovimientosController extends AppController
         $this->request->allowMethod(['post', 'delete']);
         $movimiento = $this->Movimientos->get($id);
         if ($this->Movimientos->delete($movimiento)) {
-            $this->Flash->success(__('The movimiento has been deleted.'));
+            $this->Flash->success(__('El movimiento ha sido eliminado.'));
         } else {
-            $this->Flash->error(__('The movimiento could not be deleted. Please, try again.'));
+            $this->Flash->error(__('No se pudo eliminar el movimiento. Por favor, vuelva a intentarlo.'));
         }
 
         return $this->redirect(['action' => 'index']);

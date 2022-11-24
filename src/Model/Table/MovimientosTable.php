@@ -12,6 +12,7 @@ use Cake\Validation\Validator;
  * Movimientos Model
  *
  * @property \App\Model\Table\ArticulosTable&\Cake\ORM\Association\BelongsTo $Articulos
+ * @property \App\Model\Table\FamiliasTable&\Cake\ORM\Association\BelongsTo $Familias
  *
  * @method \App\Model\Entity\Movimiento newEmptyEntity()
  * @method \App\Model\Entity\Movimiento newEntity(array $data, array $options = [])
@@ -51,6 +52,10 @@ class MovimientosTable extends Table
             'foreignKey' => 'articulo_id',
             'joinType' => 'INNER',
         ]);
+        $this->belongsTo('Familias', [
+            'foreignKey' => 'familia_id',
+            'joinType' => 'INNER',
+        ]);
     }
 
     /**
@@ -75,6 +80,11 @@ class MovimientosTable extends Table
             ->requirePresence('cantidad_vendidos', 'create')
             ->notEmptyString('cantidad_vendidos');
 
+        $validator
+            ->scalar('familia_id')
+            ->maxLength('familia_id', 255)
+            ->notEmptyString('familia_id');
+
         return $validator;
     }
 
@@ -88,6 +98,7 @@ class MovimientosTable extends Table
     public function buildRules(RulesChecker $rules): RulesChecker
     {
         $rules->add($rules->existsIn('articulo_id', 'Articulos'), ['errorField' => 'articulo_id']);
+        $rules->add($rules->existsIn('familia_id', 'Familias'), ['errorField' => 'familia_id']);
 
         return $rules;
     }

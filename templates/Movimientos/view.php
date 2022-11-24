@@ -23,6 +23,10 @@
                     <td><?= $movimiento->has('articulo') ? $this->Html->link($movimiento->articulo->nombre, ['controller' => 'Articulos', 'action' => 'view', $movimiento->articulo->id]) : '' ?></td>
                 </tr>
                 <tr>
+                    <th><?= __('Familia') ?></th>
+                    <td><?= $movimiento->has('familia') ? $this->Html->link($movimiento->familia->nombre, ['controller' => 'Familias', 'action' => 'view', $movimiento->familia->id]) : '' ?></td>
+                </tr>
+                <tr>
                     <th><?= __('Id') ?></th>
                     <td><?= $this->Number->format($movimiento->id) ?></td>
                 </tr>

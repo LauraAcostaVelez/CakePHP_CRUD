@@ -56,6 +56,7 @@ class ArticulosTable extends Table
         ]);
         $this->hasMany('Movimientos', [
             'foreignKey' => 'articulo_id',
+            'dependent' => true,
         ]);
     }
 

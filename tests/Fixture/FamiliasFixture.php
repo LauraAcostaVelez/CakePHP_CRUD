@@ -23,8 +23,8 @@ class FamiliasFixture extends TestFixture
                 'nombre' => 'Lorem ipsum dolor sit amet',
                 'codigo' => 'Lorem ipsum dolor sit amet',
                 'descripcion' => 'Lorem ipsum dolor sit amet, aliquet feugiat. Convallis morbi fringilla gravida, phasellus feugiat dapibus velit nunc, pulvinar eget sollicitudin venenatis cum nullam, vivamus ut a sed, mollitia lectus. Nulla vestibulum massa neque ut et, id hendrerit sit, feugiat in taciti enim proin nibh, tempor dignissim, rhoncus duis vestibulum nunc mattis convallis.',
-                'created' => '2022-11-21 22:31:51',
-                'modified' => '2022-11-21 22:31:51',
+                'created' => '2022-11-23 14:56:56',
+                'modified' => '2022-11-23 14:56:56',
             ],
         ];
         parent::init();

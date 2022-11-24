@@ -13,6 +13,7 @@
                 <tr>
                     <th><?= $this->Paginator->sort('id') ?></th>
                     <th><?= $this->Paginator->sort('fecha') ?></th>
+                    <th><?= $this->Paginator->sort('familia_id') ?></th>
                     <th><?= $this->Paginator->sort('articulo_id') ?></th>
                     <th><?= $this->Paginator->sort('cantidad_vendidos') ?></th>
                     <th><?= $this->Paginator->sort('created') ?></th>
@@ -25,6 +26,7 @@
                 <tr>
                     <td><?= $this->Number->format($movimiento->id) ?></td>
                     <td><?= h($movimiento->fecha) ?></td>
+                    <td><?= $movimiento->has('familia') ? $this->Html->link($movimiento->familia->nombre, ['controller' => 'Familias', 'action' => 'view', $movimiento->familia->id]) : '' ?></td>
                     <td><?= $movimiento->has('articulo') ? $this->Html->link($movimiento->articulo->nombre, ['controller' => 'Articulos', 'action' => 'view', $movimiento->articulo->id]) : '' ?></td>
                     <td><?= $this->Number->format($movimiento->cantidad_vendidos) ?></td>
                     <td><?= h($movimiento->created) ?></td>

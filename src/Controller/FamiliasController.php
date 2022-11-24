@@ -50,11 +50,11 @@ class FamiliasController extends AppController
         if ($this->request->is('post')) {
             $familia = $this->Familias->patchEntity($familia, $this->request->getData());
             if ($this->Familias->save($familia)) {
-                $this->Flash->success(__('The familia has been saved.'));
+                $this->Flash->success(__('La categoria ha sido guardada.'));
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('The familia could not be saved. Please, try again.'));
+            $this->Flash->error(__('No se pudo guardar la categoria. Por favor, vuelva a intentarlo.'));
         }
         $this->set(compact('familia'));
     }
@@ -74,11 +74,11 @@ class FamiliasController extends AppController
         if ($this->request->is(['patch', 'post', 'put'])) {
             $familia = $this->Familias->patchEntity($familia, $this->request->getData());
             if ($this->Familias->save($familia)) {
-                $this->Flash->success(__('The familia has been saved.'));
+                $this->Flash->success(__('La categoria ha sido guardada.'));
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('The familia could not be saved. Please, try again.'));
+            $this->Flash->error(__('No se pudo guardar la categoria. Por favor, vuelva a intentarlo.'));
         }
         $this->set(compact('familia'));
     }
@@ -95,9 +95,9 @@ class FamiliasController extends AppController
         $this->request->allowMethod(['post', 'delete']);
         $familia = $this->Familias->get($id);
         if ($this->Familias->delete($familia)) {
-            $this->Flash->success(__('The familia has been deleted.'));
+            $this->Flash->success(__('La categoria ha sido eliminada.'));
         } else {
-            $this->Flash->error(__('The familia could not be deleted. Please, try again.'));
+            $this->Flash->error(__('No se pudo eliminar la categoria. Por favor, vuelva a intentarlo.'));
         }
 
         return $this->redirect(['action' => 'index']);

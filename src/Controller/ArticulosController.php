@@ -21,10 +21,13 @@ class ArticulosController extends AppController
         $key = $this->request->getQuery('key');
         if($key){
             $query = $this->Articulos->find('all')->where(['Or'=>['articulos.nombre like' => '%'.$key.'%', 'articulos.codigo like' => '%'.$key.'%']]);
+            //$query = $this->Articulos->findByNombreOrCodigo($key, $key);
         }else{
             $query = $this->Articulos;
         }
+
         $this->paginate = [
+            'limit' => 4,
             'contain' => ['Familias'],
         ];
         $articulos = $this->paginate($query);
@@ -59,11 +62,11 @@ class ArticulosController extends AppController
         if ($this->request->is('post')) {
             $articulo = $this->Articulos->patchEntity($articulo, $this->request->getData());
             if ($this->Articulos->save($articulo)) {
-                $this->Flash->success(__('The articulo has been saved.'));
+                $this->Flash->success(__('El artículo ha sido guardado.'));
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('The articulo could not be saved. Please, try again.'));
+            $this->Flash->error(__('No se pudo guardar el artículo. Por favor, vuelva a intentarlo.'));
         }
         $familias = $this->Articulos->Familias->find('list', ['limit' => 200])->all();
         $this->set(compact('articulo', 'familias'));
@@ -81,19 +84,14 @@ class ArticulosController extends AppController
         $articulo = $this->Articulos->get($id, [
             'contain' => [],
         ]);
-        /*
-        $articulo = $this->Articulos
-            ->findBySlug($slug)
-            ->contain('Familias')
-            ->firstOrFail();*/
         if ($this->request->is(['patch', 'post', 'put'])) {
             $articulo = $this->Articulos->patchEntity($articulo, $this->request->getData());
             if ($this->Articulos->save($articulo)) {
-                $this->Flash->success(__('The articulo has been saved.'));
+                $this->Flash->success(__('El artículo ha sido guardado.'));
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('The articulo could not be saved. Please, try again.'));
+            $this->Flash->error(__('No se pudo guardar el artículo. Por favor, vuelva a intentarlo.'));
         }
         $familias = $this->Articulos->Familias->find('list', ['limit' => 200])->all();
         $this->set(compact('articulo', 'familias'));
@@ -111,11 +109,28 @@ class ArticulosController extends AppController
         $this->request->allowMethod(['post', 'delete']);
         $articulo = $this->Articulos->get($id);
         if ($this->Articulos->delete($articulo)) {
-            $this->Flash->success(__('The articulo has been deleted.'));
+            $this->Flash->success(__('El artículo ha sido eliminado'));
         } else {
-            $this->Flash->error(__('The articulo could not be deleted. Please, try again.'));
+            $this->Flash->error(__('No se pudo eliminar el artículo. Por favor, vuelva a intentarlo.'));
         }
 
         return $this->redirect(['action' => 'index']);
+    }
+
+    
+    public function pdf($id = null)
+    {
+        $this->viewBuilder()->enableAutoLayout(false); 
+        $articulo = $this->Articulos->get($id);
+        $this->viewBuilder()->setClassName('CakePdf.Pdf');
+        $this->viewBuilder()->setOption(
+            'pdfConfig',
+            [
+                'orientation' => 'portrait',
+                'download' => true, 
+                'filename' => 'Articulo_' . $id . '.pdf' 
+            ]
+        );
+        $this->set(compact('articulo'));
     }
 }
